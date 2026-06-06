@@ -1,20 +1,20 @@
 import SwiftUI
 
-struct NotificationsView: View {
+struct SettingsView: View {
     var body: some View {
         NavigationStack {
             ZStack {
                 VStack {
-                    Image(systemName: "bell")
+                    Image(systemName: "gear")
                         .imageScale(.large)
                         .foregroundStyle(.tint)
-                    Text("Notifications View")
+                    Text("Settings View")
                         .font(.title)
                         .padding()
                 }
                 .padding()
             }
-            .navigationTitle("Notifications")
+            .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

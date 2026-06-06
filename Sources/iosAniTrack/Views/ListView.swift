@@ -15,6 +15,7 @@ struct ListView: View {
                 .padding()
             }
             .navigationTitle("List")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

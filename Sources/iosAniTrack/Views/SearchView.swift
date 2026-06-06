@@ -15,6 +15,7 @@ struct SearchView: View {
                 .padding()
             }
             .navigationTitle("Search")
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }
