@@ -1,0 +1,4 @@
+version: 1
+bundleID: dev.maxreinartz.iosAniTrack
+product: iosAniTrack
+infoPath: Info.plist
