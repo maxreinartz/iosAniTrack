@@ -59,6 +59,8 @@ struct ProfileView: View {
     @State private var about: String? = nil
     @State private var avatarURL: String? = nil
     @State private var bannerURL: String? = nil
+    @State private var donatorBadge: String? = nil
+    @State private var donatorTier: Int? = nil
     @State private var isLoading = false
     @State private var errorMessage: String? = nil
 
@@ -66,7 +68,7 @@ struct ProfileView: View {
         GeometryReader { geometry in
             NavigationStack {
                 ZStack (alignment: .top) {
-                    VStack(spacing: 16) {
+                    VStack {
                         ZStack {
                             if let bannerURL, let url = URL(string: bannerURL) {
                                 AsyncImage(url: url) { image in
@@ -80,8 +82,9 @@ struct ProfileView: View {
                                 Color.gray.opacity(0.3)
                             }
                         }
-                        .frame(maxWidth: geometry.size.width)
+                        .frame(maxWidth: geometry.size.width - 32)
                         .frame(height: 150)
+                        .cornerRadius(10)
                         .clipped()
                         .overlay(
                             Group {
@@ -111,12 +114,27 @@ struct ProfileView: View {
                             Text(name)
                                 .font(.title)
                                 .padding(.top, 30)
+                                .padding(.bottom, -5)
                         } else if isLoading {
                             ProgressView()
                         } else {
                             Text("Unknown")
                                 .font(.title)
                                 .foregroundStyle(.secondary)
+                        }
+
+                        if let donatorBadge, let donatorTier {
+                            if donatorTier > 0 {
+                                Text("\(donatorBadge) - Tier \(donatorTier)")
+                                    .font(.subheadline)
+                                    .foregroundStyle(.primary)
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 4)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 15)
+                                            .stroke(.primary, lineWidth: 1)
+                                    )
+                            }
                         }
 
                         if let about {
@@ -172,6 +190,12 @@ struct ProfileView: View {
             }
             if let bannerImage = viewerData["bannerImage"] as? String {
                 self.bannerURL = bannerImage
+            }
+            if let donatorBadge = viewerData["donatorBadge"] as? String {
+                self.donatorBadge = donatorBadge
+            }
+            if let donatorTier = viewerData["donatorTier"] as? Int {
+                self.donatorTier = donatorTier
             }
 
         } catch {

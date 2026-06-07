@@ -50,6 +50,8 @@ func fetchViewerData() async throws -> [String: Any] {
                 large
             }
             bannerImage
+            donatorBadge
+            donatorTier
         }
     }
     """
